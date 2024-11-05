@@ -1,23 +1,21 @@
-function gerarNumerosMegaSena(quantidade){
-    var vetorNumeros = []
-    var vetorGerados = []
-    
-    while (vetorNumeros.length < quantidade){
-        var aleatorio = Math.floor(Math.random()*60 + 1)
-         vetorGerados.push(aleatorio)
+function gerarNumerosMegaSena(quantidade) {
+    // Criar um array com todos os números de 1 a 60
+    const todosNumeros = Array.from({ length: 60 }, (_, i) => i + 1);
 
-        if (vetorNumeros.includes(aleatorio)) {
-            continue
-        }else{
-            vetorNumeros.push(aleatorio)
+    // Embaralhar os números usando o algoritmo de Fisher-Yates (ou Knuth shuffle)
+    for (let i = todosNumeros.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [todosNumeros[i], todosNumeros[j]] = [todosNumeros[j], todosNumeros[i]]; // Trocar os elementos
     }
-}
-console.log("Todos os gerados", vetorGerados)
-console.log("Números exclusivos", vetorNumeros)
 
-return vetorNumeros
+    // Retornar os primeiros 'quantidade' números do array embaralhado
+    const resultado = todosNumeros.slice(0, quantidade);
 
+    console.log("Números exclusivos:", resultado);
+
+    return resultado;
 }
+
 
 
 
